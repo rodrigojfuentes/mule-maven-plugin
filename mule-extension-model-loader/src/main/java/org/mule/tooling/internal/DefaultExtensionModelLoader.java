@@ -11,9 +11,9 @@ import org.mule.runtime.container.internal.ContainerClassLoaderFactory;
 import org.mule.runtime.container.internal.DefaultModuleRepository;
 import org.mule.runtime.container.internal.JreModuleDiscoverer;
 import org.mule.runtime.container.internal.ModuleDiscoverer;
+import org.mule.runtime.deployment.model.api.artifact.extension.ExtensionModelDiscoverer;
 import org.mule.runtime.deployment.model.api.plugin.ArtifactPluginDescriptor;
 import org.mule.runtime.module.artifact.api.classloader.ArtifactClassLoader;
-import org.mule.runtime.module.deployment.impl.internal.artifact.ExtensionModelDiscoverer;
 import org.mule.tooling.api.ExtensionModelLoader;
 import org.mule.runtime.api.util.Pair;
 

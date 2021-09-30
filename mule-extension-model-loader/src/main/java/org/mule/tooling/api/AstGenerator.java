@@ -11,6 +11,7 @@
 package org.mule.tooling.api;
 
 import org.mule.runtime.ast.api.xml.AstXmlParser;
+import org.mule.runtime.deployment.model.api.artifact.extension.ExtensionModelDiscoverer;
 import org.mule.runtime.deployment.model.api.plugin.ArtifactPluginDescriptor;
 
 import static org.mule.runtime.deployment.model.api.plugin.ArtifactPluginDescriptor.MULE_PLUGIN_CLASSIFIER;
@@ -27,7 +28,7 @@ import org.mule.maven.client.api.MavenClient;
 import org.mule.runtime.api.meta.model.ExtensionModel;
 import org.mule.runtime.api.util.Pair;
 import org.mule.runtime.ast.api.ArtifactAst;
-import org.mule.runtime.module.deployment.impl.internal.artifact.ExtensionModelDiscoverer;
+
 
 
 
