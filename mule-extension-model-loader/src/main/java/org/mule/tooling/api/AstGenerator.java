@@ -61,6 +61,7 @@ public class AstGenerator {
     AstXmlParser.Builder builder = new AstXmlParser.Builder();
     builder.withExtensionModels(extensionModels);
     xmlParser = builder.build();
+    loader.dispose();
 
   }
 
@@ -87,8 +88,14 @@ public class AstGenerator {
     ValidationResult result = MuleAstUtils.validate(artifactAst);
     ArrayList<ValidationResultItem> errors = new ArrayList<ValidationResultItem>();
     ArrayList<ValidationResultItem> warnings = new ArrayList<ValidationResultItem>();
-    result.getItems().forEach(v ->{if(v.getValidation().getLevel().equals(Level.ERROR)){errors.add(v);}else {warnings.add(v);}});
-    if(errors.size()>0) {
+    result.getItems().forEach(v -> {
+      if (v.getValidation().getLevel().equals(Level.ERROR)) {
+        errors.add(v);
+      } else {
+        warnings.add(v);
+      }
+    });
+    if (errors.size() > 0) {
       throw new ConfigurationException(errors.get(0).getMessage());
     }
     return warnings;

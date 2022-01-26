@@ -330,9 +330,12 @@ public class DefaultExtensionModelService implements ExtensionModelService {
   }
 
   private DeployableArtifactClassLoaderFactory<ApplicationDescriptor> newTemporaryArtifactClassLoaderFactory() {
-    return (artifactId, parent, descriptor, artifactPluginClassLoaders) -> new MuleDeployableArtifactClassLoader(artifactId, descriptor, descriptor.getClassLoaderModel().getUrls(),
-                                                 parent.getClassLoader(),
-                                                 parent.getClassLoaderLookupPolicy(), artifactPluginClassLoaders);
+    return (artifactId, parent, descriptor,
+            artifactPluginClassLoaders) -> new MuleDeployableArtifactClassLoader(artifactId, descriptor,
+                                                                                 descriptor.getClassLoaderModel().getUrls(),
+                                                                                 parent.getClassLoader(),
+                                                                                 parent.getClassLoaderLookupPolicy(),
+                                                                                 artifactPluginClassLoaders);
   }
 
   private Set<Pair<ArtifactPluginDescriptor, ExtensionModel>> loadExtensionData(ArtifactPluginDescriptor artifactPluginDescriptor,
@@ -377,5 +380,9 @@ public class DefaultExtensionModelService implements ExtensionModelService {
     return artifactDescriptor;
   }
 
+  @Override
+  public void dispose() {
+    muleArtifactResourcesRegistry.getContainerArtifactClassLoader().dispose();
+  }
 
 }

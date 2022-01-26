@@ -42,18 +42,18 @@ public class DefaultExtensionModelLoader implements ExtensionModelLoader {
 
     this.extensionModelDiscoverer = new ExtensionModelDiscoverer();
     this.muleVersion = new MuleVersion(runtimeVersion);
-    
+
     List<ModuleDiscoverer> result = new ArrayList();
     result.add(new JreModuleDiscoverer());
     result.add(new ClasspathModuleDiscoverer(parentClassloader, workingDir.toFile()));
     final ModuleRepository moduleRepository =
         new DefaultModuleRepository(new CompositeModuleDiscoverer(result.toArray(new ModuleDiscoverer[0])));
 
-    ArtifactClassLoader containerClassLoaderFactory =
+    ArtifactClassLoader containerClassLoader =
         (new ContainerClassLoaderFactory(moduleRepository)).createContainerClassLoader(parentClassloader);
     MuleArtifactResourcesRegistry resourcesRegistry =
         new MuleArtifactResourcesRegistry(runtimeVersion, Optional.ofNullable(muleVersion), mavenClient,
-                                          moduleRepository, containerClassLoaderFactory, workingDir.toFile());
+                                          moduleRepository, containerClassLoader, workingDir.toFile());
     service = new DefaultExtensionModelService(resourcesRegistry);
   }
 
@@ -72,5 +72,10 @@ public class DefaultExtensionModelLoader implements ExtensionModelLoader {
   @Override
   public Set<Pair<ArtifactPluginDescriptor, ExtensionModel>> load(BundleDescriptor artifactDescriptor) {
     return service.loadExtensionData(artifactDescriptor, muleVersion);
+  }
+
+  @Override
+  public void dispose() {
+    service.dispose();
   }
 }

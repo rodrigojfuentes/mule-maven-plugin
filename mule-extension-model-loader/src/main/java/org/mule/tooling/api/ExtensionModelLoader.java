@@ -13,5 +13,6 @@ public interface ExtensionModelLoader {
 
   Set<Pair<ArtifactPluginDescriptor, ExtensionModel>> load(BundleDescriptor artifactDescriptor);
 
+  void dispose();
 
 }

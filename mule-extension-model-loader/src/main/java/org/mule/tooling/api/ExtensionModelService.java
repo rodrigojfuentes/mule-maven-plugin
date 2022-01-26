@@ -20,4 +20,5 @@ public interface ExtensionModelService {
 
   Set<Pair<ArtifactPluginDescriptor, ExtensionModel>> loadExtensionData(BundleDescriptor pluginDescriptor,
                                                                         MuleVersion muleVersion);
+  void dispose();
 }
